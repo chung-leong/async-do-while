@@ -31,7 +31,6 @@ exports.while = function(f) {
 
 exports.do = function(f) {
 	if (doFunc) {
-		console.log(doFunc.toString())
 		throw new Error('Cannot call do() consecutively');
 	}
 	if (!(f instanceof Function)) {
@@ -61,13 +60,14 @@ exports.end = function() {
 	if (construct === 'while-do') {
 		loopFunc = function() {
 			// first call whileFunc
-			return Promise.resolve(this.while()).then((result) => {
+			var _this = this;
+			return Promise.resolve(_this.while()).then(function(result) {
 				// if it returns true...
 				if (result) {
 					// call doFunc
-					return Promise.resolve(this.do()).then(() => {
+					return Promise.resolve(_this.do()).then(function() {
 						// then run the loop again
-						return this.loop();
+						return _this.loop();
 					});
 				}
 			});
@@ -75,13 +75,14 @@ exports.end = function() {
 	} else if (construct === 'do-while') {
 		loopFunc = function() {
 			// first call do()
-			return Promise.resolve(this.do()).then(() => {
+			var _this = this;
+			return Promise.resolve(_this.do()).then(function() {
 				// then call while()
-				return Promise.resolve(this.while()).then((result) => {
+				return Promise.resolve(_this.while()).then(function(result) {
 					// if it returns true...
 					if (result) {
 						// run loop() again
-						return this.loop();
+						return _this.loop();
 					}
 				});
 			});
@@ -109,16 +110,17 @@ exports.break = function() {
 }
 
 function run() {
-	return Promise.resolve().then(() => {
-		return this.begin();
-	}).then(() => {
-		return this.loop();
-	}).catch((err) => {
+	var _this = this;
+	return Promise.resolve().then(function() {
+		return _this.begin();
+	}).then(function() {
+		return _this.loop();
+	}).catch(function(err) {
 		if (err !== AsyncBreak) {
 			throw err;
 		}
-	}).then(() => {
-		return this.return();
+	}).then(function() {
+		return _this.return();
 	});
 }
 
