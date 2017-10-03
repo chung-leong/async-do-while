@@ -2,7 +2,7 @@
   "name": "async-do-while",
   "description": "Asychronous do-while loop",
   "author": "Chung Leong",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "./index.js",
   "preferGlobal": false,
   "repository": "git://github.com/chung-leong/async-do-while.git",
