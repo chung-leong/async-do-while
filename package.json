@@ -23,8 +23,8 @@
     "test": "./node_modules/karma/bin/karma start --single-run",
     "test:start": "./node_modules/karma/bin/karma start"
   },
-  "dependencies": {
-    "bluebird": "^2.0.0"
+  "peerDependencies": {
+    "bluebird": "*"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
