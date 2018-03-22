@@ -1,11 +1,10 @@
 # async-do-while
 
-A simple library for Bluebird that helps you create while or do-while loop
-involving asynchronous operation.
+A simple library for Bluebird that helps you create while or do-while loops
+involving asynchronous operations.
 
 One key design goal is maintaining readability. A loop is structured as
 multiple function calls so that you don't up end with awkwardly indented code.
-That also helps
 
 ## Usage ##
 
