@@ -103,7 +103,7 @@ exports.end = function() {
 	return run.call(context);
 }
 
-var AsyncBreak = new Error;
+var AsyncBreak = exports.AsyncBreak = new Error('Asynchronous break');
 
 exports.break = function() {
 	throw AsyncBreak;

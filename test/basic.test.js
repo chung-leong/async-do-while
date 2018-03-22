@@ -66,4 +66,24 @@ describe('Async loop', function() {
             expect(loop).to.equal(5);
         });
     })
+    it ('should handle nested loops', function() {
+        var loop = 0;
+        var outer = 0;
+        Async.while(() => { return (outer < 5) });
+        Async.do(() => {
+            var inner = 0;
+            Async.begin(() => { outer++ });
+            Async.while(() => { return (inner < 5) });
+            Async.do(() => {
+                return Promise.delay(25).then(() => {
+                    inner++;
+                    loop++;
+                });
+            });
+            return Async.end();
+        });
+        return Async.end().then(() => {
+            expect(loop).to.equal(25);
+        });
+    })
 })
